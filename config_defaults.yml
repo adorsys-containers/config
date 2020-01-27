@@ -1,0 +1,14 @@
+---
+.github/workflows/ci.yaml:
+  env:
+    - DOCKER_IMAGE: adorsys/
+      TAG: latest
+      DIR: .
+
+.github/CODEOWNERS:
+  usernames:
+    - '@jkroepke'
+
+.dockerfilelintrc:
+  rules:
+    latest_tag: 'off'

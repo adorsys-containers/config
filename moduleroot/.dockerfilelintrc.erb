@@ -1,0 +1,6 @@
+<%- unless @configs['rules'].nil? -%>
+rules:
+<%- @configs['rules'].keys.sort.each do |k| -%>
+  <%= k %>: <%= @configs['rules'][k] %>
+<%- end -%>
+<%- end -%>
