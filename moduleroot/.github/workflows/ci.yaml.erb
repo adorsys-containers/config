@@ -27,7 +27,7 @@ jobs:
         <%- end -%>
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
@@ -50,6 +50,12 @@ jobs:
         env: ${{ matrix.env }}
         run: docker build --pull<% @configs['buildArgs'].each do |args| -%> --build-arg=<%= args %>=${<%= args %>}<% end -%> -t "${DOCKER_IMAGE}:${TAG}" .
         working-directory: ${{ matrix.env.DIR }}
+        <%- if @configs['checkoutTestApplications'] -%>
+      - name: Checkout Test Applications
+        uses: actions/checkout@v2
+        with:
+          repository: 'adorsys-containers/test-applications'
+        <%- end -%>
 
       - name: Run tests
         env: ${{ matrix.env }}

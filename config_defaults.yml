@@ -1,6 +1,7 @@
 ---
 .github/workflows/ci.yaml:
   buildArgs: []
+  checkoutTestApplications: false
   env:
     - DOCKER_IMAGE: adorsys/
       TAG: latest
