@@ -7,6 +7,7 @@ on:
       - master
     paths-ignore:
       - 'README.md'
+      - '.sync.yml'
   schedule:
     - cron: '0 1 * * *'
 
@@ -45,7 +46,7 @@ jobs:
 
       - name: docker build
         env: ${{ matrix.env }}
-        run: docker build --pull -t "${DOCKER_IMAGE}:${TAG}" .
+        run: docker build --pull<% @configs['buildArgs'].each do |args| -%> --build-arg=<%= args %>=${<%= args %>}<% end -%> -t "${DOCKER_IMAGE}:${TAG}" .
         working-directory: ${{ matrix.env.DIR }}
 
       - name: Run tests

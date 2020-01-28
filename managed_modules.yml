@@ -1,2 +1,7 @@
 ---
 - ansible
+- arc42-tools
+- awscli
+- clair-local-scan
+- keycloak
+- mailout
