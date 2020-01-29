@@ -2,6 +2,8 @@
 - ansible
 - arc42-tools
 - awscli
+- ci-build
+- ci-helm
 - clair-local-scan
 - keycloak
 - mailout
