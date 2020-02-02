@@ -10,8 +10,10 @@ on:
     paths-ignore:
       - 'README.md'
       - '.sync.yml'
+<%- if @configs['schedule'] -%>
   schedule:
     - cron: '0 1 * * *'
+<%- end -%>
 
 jobs:
   build:
@@ -89,7 +91,7 @@ jobs:
           docker history "${DOCKER_IMAGE}:${TAG}"
 
       - name: docker login
-        if: github.ref == 'refs/heads/master'
+        if: <%= @configs['pushCondition'] %>
         run: |-
           echo "${REGISTRY_PASSWORD}" | docker login --username "${REGISTRY_USERNAME}" --password-stdin
           echo "${GITHUB_TOKEN}" | docker login --username '$GITHUB_ACTOR' --password-stdin docker.pkg.github.com
@@ -100,7 +102,7 @@ jobs:
 
       - name: Publish Image on DockerHub
         # https://github.community/t5/GitHub-Actions/GitHub-Actions-branch-conditional/m-p/29794
-        if: github.ref == 'refs/heads/master'
+        if: <%= @configs['pushCondition'] %>
         env: ${{ matrix.env }}
         run: |
           docker tag "${DOCKER_IMAGE}:${TAG}" "docker.pkg.github.com/${GITHUB_REPOSITORY}/${DOCKER_IMAGE#*/}:${TAG}"
@@ -109,7 +111,7 @@ jobs:
 
       - name: Publish Image aliases on DockerHub
         # https://github.community/t5/GitHub-Actions/GitHub-Actions-branch-conditional/m-p/29794
-        if: github.ref == 'refs/heads/master' && matrix.env.ALIASES
+        if: <%= @configs['pushCondition'] %> && matrix.env.ALIASES
         env: ${{ matrix.env }}
         run: |
           for ALIAS in ${ALIASES}; do
@@ -124,7 +126,7 @@ jobs:
 
       - name: Publish Image snapshosts on DockerHub
         # https://github.community/t5/GitHub-Actions/GitHub-Actions-branch-conditional/m-p/29794
-        if: github.ref == 'refs/heads/master' && matrix.env.SNAPSHOT
+        if: <%= @configs['pushCondition'] %> && matrix.env.SNAPSHOT
         env: ${{ matrix.env }}
         run: |
           if [ "$(date +%d)" -eq "1" ]; then
@@ -145,4 +147,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: github.ref == 'refs/heads/master' && failure()
+        if: <%= @configs['pushCondition'] %> && failure()

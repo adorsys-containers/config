@@ -2,6 +2,8 @@
 .github/workflows/ci.yaml:
   buildArgs: []
   checkoutTestApplications: false
+  schedule: true
+  pushCondition: "github.ref == 'refs/heads/master'"
   env:
     - DOCKER_IMAGE: adorsys/
       TAG: latest
