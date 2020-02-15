@@ -12,7 +12,7 @@ on:
       - '.sync.yml'
 <%- if @configs['schedule'] -%>
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '<%= @configs['schedule'] %>'
 <%- end -%>
 
 jobs:

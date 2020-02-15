@@ -2,7 +2,7 @@
 .github/workflows/ci.yaml:
   buildArgs: []
   checkoutTestApplications: false
-  schedule: true
+  schedule: '30 5 * * *'
   pushCondition: "github.ref == 'refs/heads/master'"
   env:
     - DOCKER_IMAGE: adorsys/
