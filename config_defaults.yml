@@ -8,6 +8,7 @@
     - DOCKER_IMAGE: adorsys/
       TAG: latest
       DIR: .
+  customActionWorkflow: ''
 
 .github/CODEOWNERS:
   usernames:

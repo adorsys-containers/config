@@ -138,7 +138,9 @@ jobs:
             done;
             (exit $s)
           fi
-
+      <%- if @configs['customActionWorkflow'] -%>
+      <%= @configs['customActionWorkflow'] %>
+      <%- end -%>
       - name: Slack notification if pipeline failed
         uses: 8398a7/action-slack@v2
         with:
