@@ -5,6 +5,7 @@
 - ci-build
 - ci-helm
 - clair-local-scan
+- clair-local-scan-db
 - dependency-check-db
 - keycloak
 - mailout
