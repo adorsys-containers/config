@@ -4,4 +4,5 @@ namespace: adorsys-containers
 branch: modulesync
 message: "Update from adorsys-containers/config"
 pr_title: "Updates to module template files via modulesync"
-pr_labels: MODULESYNC
+pr_labels:
+  - modulesync
