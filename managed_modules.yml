@@ -2,8 +2,6 @@
 - arc42-tools
 - ci-build
 - ci-helm
-- dependency-check-db
-- keycloak
 - mailout
 - nginx
 - node
