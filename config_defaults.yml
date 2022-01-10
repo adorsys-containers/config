@@ -11,8 +11,7 @@
   customActionWorkflow: ''
 
 .github/CODEOWNERS:
-  usernames:
-    - '@jkroepke'
+  usernames: []
 
 .dockerfilelintrc:
   rules:
